@@ -2,7 +2,7 @@ package echo
 
 import (
 	ctrl "github.com/FloatTech/zbpctrl"
-	rei "github.com/fumiama/ReiBot"
+	rei "github.com/fr0stltek/MeiBot"
 )
 
 func init() {

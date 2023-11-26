@@ -1,12 +1,10 @@
 <div align="center">
   <a href="https://crypko.ai/crypko/GtWYDpVMx5GYm/">
-  <img src=".github/Misaki.png" alt="看板娘" width = "256">
+  <img src=".github/Mei.png" alt="看板娘" width = "256">
   </a><br>
 
-  <h1>ReiBot</h1>
-  Lightweight Telegram bot framework<br><br>
-
-  <img src="https://counter.seku.su/cmoe?name=ReiBot&theme=r34" /><br>
+  <h1>MeiBot</h1>
+  Lightweight Telegram bot framework<br>A modified <a href="https://github.com/fumiama/ReiBot">ReiBot</a>
 
 </div>
 
@@ -25,7 +23,7 @@ This framework is a simple wrapper for [go-telegram-bot-api](https://github.com/
 package main
 
 import (
-	rei "github.com/fumiama/ReiBot"
+	rei "github.com/fr0stltek/MeiBot"
 	tgba "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
@@ -63,7 +61,7 @@ package main
 import (
 	"strings"
 
-	rei "github.com/fumiama/ReiBot"
+	rei "github.com/fr0stltek/MeiBot"
 	tgba "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	log "github.com/sirupsen/logrus"
 )
@@ -110,4 +108,5 @@ func main() {
 
 ## Thanks
 
+- [ReiBot](https://github.com/fumiama/ReiBot)
 - [ZeroBot](https://github.com/wdvxdr1123/ZeroBot)

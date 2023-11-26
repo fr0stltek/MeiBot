@@ -1,9 +1,9 @@
 package main
 
 import (
-	_ "github.com/fumiama/ReiBot/example/echo"
+	_ "github.com/fr0stltek/MeiBot/example/echo"
 
-	rei "github.com/fumiama/ReiBot"
+	rei "github.com/fr0stltek/MeiBot"
 	tgba "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 

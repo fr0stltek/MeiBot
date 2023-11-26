@@ -3,7 +3,7 @@ package main
 import (
 	"strings"
 
-	rei "github.com/fumiama/ReiBot"
+	rei "github.com/fr0stltek/MeiBot"
 	tgba "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	log "github.com/sirupsen/logrus"
 )

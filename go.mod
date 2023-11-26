@@ -1,4 +1,4 @@
-module github.com/fumiama/ReiBot
+module github.com/fr0stltek/MeiBot
 
 go 1.18
 
