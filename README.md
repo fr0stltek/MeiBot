@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://crypko.ai/crypko/GtWYDpVMx5GYm/">
-  <img src=".github/Mei.png" alt="看板娘" width = "256">
+  <img src=".github/Mei.png" alt="崩坏3rd-雷电芽衣 Raiden Mei" width = "256">
   </a><br>
 
   <h1>MeiBot</h1>
