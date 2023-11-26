@@ -42,13 +42,13 @@ func init() {
 			switch ctx.State["command"] {
 			case "响应", "response":
 				if m.CanResponse(grp) {
-					msg = ctx.Caller.Self.String() + "已经在工作了哦~"
+					msg = ctx.Caller.Self.String() + "已经处于激活状态。"
 					break
 				}
 				if SuperUserPermission(ctx) {
 					err := m.Response(grp)
 					if err == nil {
-						msg = ctx.Caller.Self.String() + "将开始在此工作啦~"
+						msg = ctx.Caller.Self.String() + "唤醒成功。"
 					} else {
 						msg = "ERROR: " + err.Error()
 					}
@@ -82,22 +82,22 @@ func init() {
 							return nil
 						}(),
 					},
-					Caption:   "主人, @" + ctx.Message.From.String() + " 请求响应~\n*ChatType*: " + ctx.Message.Chat.Type + "\n*ChatUserName*: " + ctx.Message.Chat.UserName + "\n*ChatID*: " + strconv.FormatInt(ctx.Message.Chat.ID, 10) + "\n*ChatTitle*: " + ctx.Message.Chat.Title + "\n*ChatDescription*: " + ctx.Message.Chat.Description,
+					Caption:   "阁下，@" + ctx.Message.From.String() + " 发送了激活申请。\n*ChatType*: " + ctx.Message.Chat.Type + "\n*ChatUserName*: " + ctx.Message.Chat.UserName + "\n*ChatID*: " + strconv.FormatInt(ctx.Message.Chat.ID, 10) + "\n*ChatTitle*: " + ctx.Message.Chat.Title + "\n*ChatDescription*: " + ctx.Message.Chat.Description,
 					ParseMode: "Markdown",
 				}
 				for _, id := range ctx.Caller.b.SuperUsers {
 					notify.ChatID = id
 					_, _ = ctx.Caller.Send(notify)
 				}
-				msg = "已将响应请求发给主人了, 请耐心等待回应哦~"
+				msg = "已经发送激活申请至管理员，请耐心等待。"
 			case "沉默", "silence":
 				if !m.CanResponse(grp) {
-					msg = ctx.Caller.Self.String() + "已经在休息了哦~"
+					msg = ctx.Caller.Self.String() + "已处于关闭状态。"
 					break
 				}
 				err := m.Silence(grp)
 				if err == nil {
-					msg = ctx.Caller.Self.String() + "将开始休息啦~"
+					msg = ctx.Caller.Self.String() + "关闭成功。"
 				} else {
 					msg = "ERROR: " + err.Error()
 				}
@@ -118,7 +118,7 @@ func init() {
 							return nil
 						}(),
 					},
-					Caption:   "主人, @" + ctx.Message.From.String() + " 主动结束了响应~\n*ChatType*: " + ctx.Message.Chat.Type + "\n*ChatUserName*: " + ctx.Message.Chat.UserName + "\n*ChatID*: " + strconv.FormatInt(ctx.Message.Chat.ID, 10) + "\n*ChatTitle*: " + ctx.Message.Chat.Title + "\n*ChatDescription*: " + ctx.Message.Chat.Description,
+					Caption:   "阁下，@" + ctx.Message.From.String() + " 关闭了本机。\n*ChatType*: " + ctx.Message.Chat.Type + "\n*ChatUserName*: " + ctx.Message.Chat.UserName + "\n*ChatID*: " + strconv.FormatInt(ctx.Message.Chat.ID, 10) + "\n*ChatTitle*: " + ctx.Message.Chat.Title + "\n*ChatDescription*: " + ctx.Message.Chat.Description,
 					ParseMode: "Markdown",
 				}
 				for _, id := range ctx.Caller.b.SuperUsers {
@@ -140,7 +140,7 @@ func init() {
 			msg := ""
 			err = m.Response(int64(grp))
 			if err == nil {
-				msg = ctx.Caller.Self.String() + "将开始在此工作啦~"
+				msg = ctx.Caller.Self.String() + "唤醒成功。"
 			} else {
 				msg = "ERROR: " + err.Error()
 			}
@@ -167,7 +167,7 @@ func init() {
 				BaseChat: tgba.BaseChat{
 					ChatID: int64(grp),
 				},
-				Text: "很遗憾, 因为各种原因, 您暂时未获使用权限呢",
+				Text: "很遗憾，阁下的激活申请未通过。",
 			})
 			if err != nil {
 				_, _ = ctx.Caller.Send(tgba.NewCallbackWithAlert(ctx.Value.(*tgba.CallbackQuery).ID, "ERROR: "+err.Error()))
@@ -185,14 +185,14 @@ func init() {
 			case strings.Contains(cmd, "响应") || strings.Contains(cmd, "response"):
 				err := m.Response(0)
 				if err == nil {
-					msg = ctx.Caller.Self.String() + "将开始在此工作啦~"
+					msg = ctx.Caller.Self.String() + "唤醒成功。"
 				} else {
 					msg = "ERROR: " + err.Error()
 				}
 			case strings.Contains(cmd, "沉默") || strings.Contains(cmd, "silence"):
 				err := m.Silence(0)
 				if err == nil {
-					msg = ctx.Caller.Self.String() + "将开始休息啦~"
+					msg = ctx.Caller.Self.String() + "关闭成功。"
 				} else {
 					msg = "ERROR: " + err.Error()
 				}
@@ -213,7 +213,7 @@ func init() {
 			_ = ctx.Parse(&model)
 			service, ok := Lookup(model.Args)
 			if !ok {
-				_, _ = ctx.SendPlainMessage(false, "没有找到指定服务!")
+				_, _ = ctx.SendPlainMessage(false, "该模块不存在。")
 				return
 			}
 			if strings.Contains(model.Command, "启用") || strings.Contains(model.Command, "enable") {
@@ -221,14 +221,14 @@ func init() {
 				if service.Options.OnEnable != nil {
 					service.Options.OnEnable(ctx)
 				} else {
-					_, _ = ctx.SendPlainMessage(false, "已启用服务: ", model.Args)
+					_, _ = ctx.SendPlainMessage(false, "已启用模块: ", model.Args)
 				}
 			} else {
 				service.Disable(grp)
 				if service.Options.OnDisable != nil {
 					service.Options.OnDisable(ctx)
 				} else {
-					_, _ = ctx.SendPlainMessage(false, "已禁用服务: ", model.Args)
+					_, _ = ctx.SendPlainMessage(false, "已禁用模块: ", model.Args)
 				}
 			}
 		})
@@ -240,15 +240,15 @@ func init() {
 			_ = ctx.Parse(&model)
 			service, ok := Lookup(model.Args)
 			if !ok {
-				_, _ = ctx.SendPlainMessage(false, "没有找到指定服务!")
+				_, _ = ctx.SendPlainMessage(false, "该模块不存在。")
 				return
 			}
 			if strings.Contains(model.Command, "启用") || strings.Contains(model.Command, "enable") {
 				service.Enable(0)
-				_, _ = ctx.SendPlainMessage(false, "已全局启用服务: ", model.Args)
+				_, _ = ctx.SendPlainMessage(false, "已全局启用模块: ", model.Args)
 			} else {
 				service.Disable(0)
-				_, _ = ctx.SendPlainMessage(false, "已全局禁用服务: ", model.Args)
+				_, _ = ctx.SendPlainMessage(false, "已全局禁用模块: ", model.Args)
 			}
 		})
 
@@ -261,11 +261,11 @@ func init() {
 			_ = ctx.Parse(&model)
 			service, ok := Lookup(model.Args)
 			if !ok {
-				_, _ = ctx.SendPlainMessage(false, "没有找到指定服务!")
+				_, _ = ctx.SendPlainMessage(false, "该模块不存在。")
 				return
 			}
 			service.Reset(grp)
-			_, _ = ctx.SendPlainMessage(false, "已还原服务的默认启用状态: ", model.Args)
+			_, _ = ctx.SendPlainMessage(false, "已还原模块的默认启用状态: ", model.Args)
 		})
 
 		OnMessageCommandGroup([]string{
@@ -281,7 +281,7 @@ func init() {
 			if len(args) >= 2 {
 				service, ok := Lookup(args[0])
 				if !ok {
-					_, _ = ctx.SendPlainMessage(false, "没有找到指定服务!")
+					_, _ = ctx.SendPlainMessage(false, "该模块不存在。")
 					return
 				}
 				grp := ctx.Message.Chat.ID
@@ -327,7 +327,7 @@ func init() {
 				_, _ = ctx.SendPlainMessage(false, msg)
 				return
 			}
-			_, _ = ctx.SendPlainMessage(false, "参数错误!")
+			_, _ = ctx.SendPlainMessage(false, "参数错误。")
 		})
 
 		OnMessageCommandGroup([]string{
@@ -339,7 +339,7 @@ func init() {
 			if len(args) >= 2 {
 				service, ok := Lookup(args[0])
 				if !ok {
-					_, _ = ctx.SendPlainMessage(false, "没有找到指定服务!")
+					_, _ = ctx.SendPlainMessage(false, "该模块不存在。")
 					return
 				}
 				msg := "*" + args[0] + "全局报告*"
@@ -363,7 +363,7 @@ func init() {
 				_, _ = ctx.SendPlainMessage(false, msg)
 				return
 			}
-			_, _ = ctx.SendPlainMessage(false, "参数错误!")
+			_, _ = ctx.SendPlainMessage(false, "参数错误。")
 		})
 
 		OnMessageCommandGroup([]string{
@@ -396,7 +396,7 @@ func init() {
 				_, _ = ctx.SendPlainMessage(false, msg)
 				return
 			}
-			_, _ = ctx.SendPlainMessage(false, "参数错误!")
+			_, _ = ctx.SendPlainMessage(false, "参数错误。")
 		})
 
 		OnMessageCommandGroup([]string{
@@ -406,7 +406,7 @@ func init() {
 			_ = ctx.Parse(&model)
 			service, ok := Lookup(model.Args)
 			if !ok {
-				_, _ = ctx.SendPlainMessage(false, "没有找到指定服务!")
+				_, _ = ctx.SendPlainMessage(false, "该模块不存在。")
 				return
 			}
 			err := service.Flip()
@@ -423,14 +423,14 @@ func init() {
 				_ = ctx.Parse(&model)
 				service, ok := Lookup(model.Args)
 				if !ok {
-					_, _ = ctx.SendPlainMessage(false, "没有找到指定服务!")
+					_, _ = ctx.SendPlainMessage(false, "该模块不存在。")
 					return
 				}
 				if service.Options.Help != "" {
 					gid := ctx.Message.Chat.ID
 					_, _ = ctx.SendPlainMessage(false, service.EnableMarkIn(gid), " ", service)
 				} else {
-					_, _ = ctx.SendPlainMessage(false, "该服务无帮助!")
+					_, _ = ctx.SendPlainMessage(false, "该模块没有说明书。")
 				}
 			})
 
