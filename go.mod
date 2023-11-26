@@ -4,17 +4,17 @@ go 1.18
 
 require (
 	github.com/FloatTech/floatbox v0.0.0-20230207080446-026a2f086c74
-	github.com/FloatTech/zbpctrl v1.5.3-0.20230130095145-714ad318cd52
+	github.com/FloatTech/zbpctrl v1.6.0
 	github.com/RomiChan/syncx v0.0.0-20221202055724-5f842c53020e
 	github.com/fumiama/go-base16384 v1.6.4
 	github.com/go-telegram-bot-api/telegram-bot-api/v5 v5.5.1
-	github.com/sirupsen/logrus v1.9.0
+	github.com/sirupsen/logrus v1.9.3
 	github.com/stretchr/testify v1.8.1
-	github.com/wdvxdr1123/ZeroBot v1.6.9
+	github.com/wdvxdr1123/ZeroBot v1.7.5-0.20231009162356-57f71b9f5258
 )
 
 require (
-	github.com/FloatTech/sqlite v1.5.7 // indirect
+	github.com/FloatTech/sqlite v1.6.3 // indirect
 	github.com/FloatTech/ttl v0.0.0-20220715042055-15612be72f5b // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/fumiama/cron v1.3.0 // indirect
