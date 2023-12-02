@@ -79,7 +79,7 @@ func init() {
 								fp := p.Photos[0]
 								return tgba.FileID(fp[len(fp)-1].FileID)
 							}
-							return nil
+							return tgba.FileURL("https://raw.githubusercontent.com/fr0stltek/MeiBot/main/.github/Mei.png")
 						}(),
 					},
 					Caption:   "阁下，@" + ctx.Message.From.String() + " 发送了激活申请。\n*ChatType*: " + ctx.Message.Chat.Type + "\n*ChatUserName*: " + ctx.Message.Chat.UserName + "\n*ChatID*: " + strconv.FormatInt(ctx.Message.Chat.ID, 10) + "\n*ChatTitle*: " + ctx.Message.Chat.Title + "\n*ChatDescription*: " + ctx.Message.Chat.Description,
@@ -115,7 +115,7 @@ func init() {
 								fp := p.Photos[0]
 								return tgba.FileID(fp[len(fp)-1].FileID)
 							}
-							return nil
+							return tgba.FileURL("https://raw.githubusercontent.com/fr0stltek/MeiBot/main/.github/Mei.png")
 						}(),
 					},
 					Caption:   "阁下，@" + ctx.Message.From.String() + " 关闭了本机。\n*ChatType*: " + ctx.Message.Chat.Type + "\n*ChatUserName*: " + ctx.Message.Chat.UserName + "\n*ChatID*: " + strconv.FormatInt(ctx.Message.Chat.ID, 10) + "\n*ChatTitle*: " + ctx.Message.Chat.Title + "\n*ChatDescription*: " + ctx.Message.Chat.Description,
