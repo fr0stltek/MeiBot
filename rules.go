@@ -445,6 +445,30 @@ func CreaterPermission(ctx *Ctx) bool {
 	}
 }
 
+// AnonymousPermsn only triggered by anonymous messages
+func AnonymousPermsn(ctx *Ctx) bool {
+	switch msg := ctx.Value.(type) {
+	case *tgba.Message:
+		if msg.From == nil || msg.Chat == nil { // 确保无空
+			return false
+		}
+		if msg.From.ID == 1087968824 {
+			return true
+		}
+		return false
+	case *tgba.CallbackQuery:
+		if msg.From == nil || msg.Message == nil || msg.Message.Chat == nil {
+			return false
+		}
+		if msg.From.ID == 1087968824 {
+			return true
+		}
+		return false
+	default:
+		return false
+	}
+}
+
 // AdminPermission only triggered by the group admins or higher permission
 func AdminPermission(ctx *Ctx) bool {
 	if SuperUserPermission(ctx) {
